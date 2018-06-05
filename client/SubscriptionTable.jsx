@@ -52,44 +52,15 @@ export class SubscriptionTable extends React.Component {
     data.subscriptions = Subscriptions.find(query, options).map(function(document){
       let result = {
         _id: document._id,
-        dateTime: moment(get(document, 'dateTime', null)).format("YYYY-MM-DD"),
         status: get(document, 'status', ''),
-        patientReference: get(document, 'patient.display', ''),
-        subscriptioningParty: get(document, 'subscriptioningParty.0.display', ''),
-        organization: get(document, 'organization.0.display', ''),
-        policyRule: get(document, 'policyRule', ''),
-        exceptType: get(document, 'except.0.type', ''),
-        exceptAction: get(document, 'except.0.action.0.coding.0.code', ''),
-        exceptClass: '',
-        start: get(document, 'period.start', ''),
-        end: get(document, 'period.end', '')
+        criteria: get(document, 'criteria', ''),
+        type: get(document, 'channel.type', ''),
+        endpoint: get(document, 'channel.endpoint', ''),
+        payload: get(document, 'channel.payload', ''),
+        options: JSON.stringify(get(document, 'channel.options', ''))
       };
-
-      var exceptions;
-      if(get(document, 'except.0.class')){
-        result.exceptClass = "";
-        document.except[0].class.forEach(function(exception){   
-          if(result.exceptClass == ''){
-            result.exceptClass = exception.code;
-          }  else {
-            result.exceptClass = result.exceptClass + ' - ' + exception.code;
-          }      
-        });
-      }
       return result;
     });
-
-    if (Session.get('appWidth') < 768) {
-      data.style.hideOnPhone.visibility = 'hidden';
-      data.style.hideOnPhone.display = 'none';
-      data.style.cellHideOnPhone.visibility = 'hidden';
-      data.style.cellHideOnPhone.display = 'none';
-    } else {
-      data.style.hideOnPhone.visibility = 'visible';
-      data.style.hideOnPhone.display = 'table-cell';
-      data.style.cellHideOnPhone.visibility = 'visible';
-      data.style.cellHideOnPhone.display = 'table-cell';
-    }
 
     // console.log("SubscriptionTable[data]", data);
     return data;
@@ -115,15 +86,12 @@ export class SubscriptionTable extends React.Component {
         tableRows.push(
           <tr key={i} className="subscriptionRow" style={{cursor: "pointer"}}>
   
-            <td className='date' onClick={ this.rowClick.bind('this', this.data.subscriptions[i]._id)} style={{minWidth: '100px', paddingTop: '16px'}}>{this.data.subscriptions[i].dateTime }</td>
             <td className='status' onClick={ this.rowClick.bind('this', this.data.subscriptions[i]._id)} style={this.data.style.cell}>{this.data.subscriptions[i].status}</td>
-            <td className='patientReference' onClick={ this.rowClick.bind('this', this.data.subscriptions[i]._id)} style={this.data.style.cell} >{this.data.subscriptions[i].patientReference }</td>
-            <td className='subscriptioningParty' onClick={ this.rowClick.bind('this', this.data.subscriptions[i]._id)} style={this.data.style.cell} >{this.data.subscriptions[i].subscriptioningParty}</td>
-            <td className='organization' style={this.data.style.cell} >{this.data.subscriptions[i].organization}</td>
-            {/* <td className='policyRule' style={this.data.style.cell} >{this.data.subscriptions[i].policyRule}</td> */}
-            <td className='exceptType' style={this.data.style.cell} >{this.data.subscriptions[i].exceptType}</td>
-            <td className='exceptAction' style={this.data.style.cell} >{this.data.subscriptions[i].exceptAction}</td>
-            <td className='exceptClass' style={this.data.style.cell} >{this.data.subscriptions[i].exceptClass}</td>
+            <td className='criteria' onClick={ this.rowClick.bind('this', this.data.subscriptions[i]._id)} style={this.data.style.cell}>{this.data.subscriptions[i].criteria}</td>
+            <td className='type' onClick={ this.rowClick.bind('this', this.data.subscriptions[i]._id)} style={this.data.style.cell}>{this.data.subscriptions[i].type}</td>
+            <td className='endpoint' onClick={ this.rowClick.bind('this', this.data.subscriptions[i]._id)} style={this.data.style.cell}>{this.data.subscriptions[i].endpoint}</td>
+            <td className='payload' onClick={ this.rowClick.bind('this', this.data.subscriptions[i]._id)} style={this.data.style.cell}>{this.data.subscriptions[i].payload}</td>
+            <td className='options' onClick={ this.rowClick.bind('this', this.data.subscriptions[i]._id)} style={this.data.style.cell}>{this.data.subscriptions[i].options}</td>
           </tr>
         );
       }  
@@ -134,15 +102,12 @@ export class SubscriptionTable extends React.Component {
         <Table id='subscriptionsTable' hover >
         <thead>
           <tr>
-            <th className='name' style={{minWidth: '100px'}}>date</th>
             <th className='status'>status</th>
-            <th className='patientReference'>patient</th>
-            <th className='subscriptioningParty' >subscriptioning party</th>
-            <th className='organization' >organization</th>
-            {/* <th className='rule' >rule</th> */}
-            <th className='type' >type</th>
-            <th className='action' >action</th>
-            <th className='class' >class</th>
+            <th className='criteria'>criteria</th>
+            <th className='type'>type</th>
+            <th className='endpoint'>endpoint</th>
+            <th className='payload'>payload</th>
+            <th className='options'>options</th>
           </tr>
         </thead>
         <tbody>
