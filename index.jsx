@@ -15,8 +15,14 @@ var SidebarElements = [{
   'to': '/subscriptions',
   'href': '/subscriptions'
 }];
+var AdminSidebarElements = [{
+  'primaryText': 'Subscriptions',
+  'to': '/subscriptions',
+  'href': '/subscriptions'
+}];
 
 export { 
+  AdminSidebarElements,
   SidebarElements, 
   DynamicRoutes, 
 

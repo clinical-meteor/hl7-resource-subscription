@@ -82,7 +82,7 @@ export default class SubscriptionDetail extends React.Component {
     return (
       <div id={this.props.id} className="subscriptionDetail">
         <CardText>
-          <TextField
+          {/* <TextField
             id='nameInput'
             ref='name'
             name='name'
@@ -129,7 +129,7 @@ export default class SubscriptionDetail extends React.Component {
             value={ get(this, 'data.subscription.identifier[0].value', '')}
             onChange={ this.changeState.bind(this, 'mrn')}
             fullWidth
-            /><br/>
+            /><br/> */}
         </CardText>
         <CardActions>
           { this.determineButtons(this.data.subscriptionId) }

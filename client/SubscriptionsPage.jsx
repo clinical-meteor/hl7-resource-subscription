@@ -75,7 +75,7 @@ export class SubscriptionsPage extends React.Component {
               title="Subscriptions"
             />
             <CardText>
-              <Tabs id='subscriptionsPageTabs' default value={this.data.tabIndex} onChange={this.handleTabChange} initialSelectedIndex={1}>
+              {/* <Tabs id='subscriptionsPageTabs' default value={this.data.tabIndex} onChange={this.handleTabChange} initialSelectedIndex={1}>
                  <Tab className="newSubscriptionTab" label='New' style={this.data.style.tab} onActive={ this.onNewTab } value={0}>
                    <SubscriptionDetail id='newSubscription' />
                  </Tab>
@@ -85,8 +85,9 @@ export class SubscriptionsPage extends React.Component {
                  <Tab className="subscriptionDetailTab" label='Detail' onActive={this.handleActive} style={this.data.style.tab} value={2}>
                    <SubscriptionDetail id='subscriptionDetails' currentSubscription={this.data.currentSubscription} />
                  </Tab>
-             </Tabs>
+             </Tabs> */}
 
+            <SubscriptionTable showBarcodes={true} />
 
             </CardText>
           </GlassCard>

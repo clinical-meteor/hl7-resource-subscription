@@ -1,22 +1,40 @@
 
 
 Meteor.methods({
-    initializeSubscriptions(){
-      console.log('Initialize Subscriptions...')
+    createSubscription(resourceType, query, options){
+      console.log('Create Subscriptions...')
 
       var newSubscription = {
-          "resourceType": "Subscription",
-        
-        };
-
-
-        if(Subscriptions.find().count() < 2){
-
-          newSubscription = {};
-
-          var consentId = Subscriptions.insert(newSubscription);
-
-            console.log('Initialized ' + Subscriptions.find().count() + ' records.')          
+        "resourceType": "Subscription", 
+        "status": "active",
+        "channel": {
+          "type": "websocket",
+          "endpoint": "http://localhost:3000",
+          "payload": {
+            "resourceType": resourceType,
+            "query": query,
+            "options": options,
+            "trigger": {
+              "after": {
+                "find": {},
+                "findOne": {},
+                "insert": {},
+                "update": {},
+                "delete": {}
+              },
+              "before": {
+                "find": {},
+                "findOne": {},
+                "insert": {},
+                "update": {},
+                "delete": {}
+              }
+            }
+          }
         }
+      };
+
+
+      Subscriptions.insert(newSubscription);       
     }
 })
