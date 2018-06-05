@@ -20,9 +20,9 @@ Meteor.methods({
           "type": "websocket",
           "endpoint": Meteor.absoluteUrl(),
           "payload": resourceType,
-            "query": query,
-            "options": options,
-            "triggers": {
+          "query": query,
+          "options": EJSON.stringify(options),
+          "triggers": {
               "after": {
                 "find": {},
                 "findOne": {},
@@ -41,17 +41,24 @@ Meteor.methods({
         }
       };
 
-      console.log('newSubscription', newSubscription)
+      process.env.DEBUG && console.log('newSubscription', newSubscription)
 
       let currentSubscription = Subscriptions.findOne({'channel.payload': resourceType});
 
       
       if(currentSubscription){
-        console.log('Subscription exists; updating...')
+        process.env.DEBUG &&console.log('Subscription exists; updating...')
         Subscriptions.update({_id: currentSubscription._id}, { $set: newSubscription });       
       } else {
-        console.log('Creating...')
+        process.env.DEBUG &&console.log('Creating...')
         Subscriptions.insert(newSubscription);       
       }
+    },
+    removeSubscription(resourceType){
+        console.log('Removing ' + resourceType + ' subscriptions...')
+
+        check(resourceType, String)
+
+        Subscriptions.remove({'channel.payload': resourceType});
     }
 })
