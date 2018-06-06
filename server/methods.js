@@ -41,7 +41,7 @@ Meteor.methods({
         }
       };
 
-      process.env.DEBUG && console.log('newSubscription', newSubscription)
+      process.env.VERBOSE && console.log('newSubscription', newSubscription)
 
       let currentSubscription = Subscriptions.findOne({'channel.payload': resourceType});
 
