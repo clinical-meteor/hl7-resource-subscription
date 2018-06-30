@@ -46,7 +46,7 @@ Meteor.methods({
       let currentSubscription = Subscriptions.findOne({'channel.payload': resourceType});
 
       if(currentSubscription){
-        process.env.TRACE_SUBSCRIPTIONS &&console.log('Subscription exists; updating...')
+        process.env.TRACE_SUBSCRIPTIONS && console.log('Subscription exists; updating...')
         Subscriptions.update({_id: currentSubscription._id}, { $set: newSubscription });       
       } else {
         process.env.TRACE_SUBSCRIPTIONS &&console.log('Creating...')
@@ -54,7 +54,7 @@ Meteor.methods({
       }
     },
     removeSubscription(resourceType){
-        console.log('Removing ' + resourceType + ' subscriptions...')
+        process.env.TRACE_SUBSCRIPTIONS && console.log('Removing ' + resourceType + ' subscriptions...')
 
         check(resourceType, String)
 

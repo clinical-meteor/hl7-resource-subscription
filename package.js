@@ -1,6 +1,6 @@
 Package.describe({
   name: 'clinical:hl7-resource-subscription',
-  version: '3.3.8',
+  version: '3.3.9',
   summary: 'HL7 FHIR Resource - Subscription',
   git: 'https://github.com/clinical-meteor/hl7-resource-subscription',
   documentation: 'README.md'
