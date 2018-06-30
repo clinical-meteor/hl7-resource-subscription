@@ -2,7 +2,7 @@ import { EJSON } from 'meteor/ejson'
 
 Meteor.methods({
     createSubscription(resourceType, query, options){
-      console.log('Creating ' + resourceType + ' subscriptions...')
+      process.env.TRACE_SUBSCRIPTIONS && console.log('Creating ' + resourceType + ' subscriptions...')
 
       check(resourceType, String)
       check(query, Object)
@@ -45,12 +45,11 @@ Meteor.methods({
 
       let currentSubscription = Subscriptions.findOne({'channel.payload': resourceType});
 
-      
       if(currentSubscription){
-        process.env.DEBUG &&console.log('Subscription exists; updating...')
+        process.env.TRACE_SUBSCRIPTIONS &&console.log('Subscription exists; updating...')
         Subscriptions.update({_id: currentSubscription._id}, { $set: newSubscription });       
       } else {
-        process.env.DEBUG &&console.log('Creating...')
+        process.env.TRACE_SUBSCRIPTIONS &&console.log('Creating...')
         Subscriptions.insert(newSubscription);       
       }
     },
