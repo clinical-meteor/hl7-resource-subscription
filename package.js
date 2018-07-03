@@ -1,6 +1,6 @@
 Package.describe({
   name: 'clinical:hl7-resource-subscription',
-  version: '3.3.111',
+  version: '3.3.12',
   summary: 'HL7 FHIR Resource - Subscription',
   git: 'https://github.com/clinical-meteor/hl7-resource-subscription',
   documentation: 'README.md'
@@ -26,7 +26,7 @@ Package.onUse(function (api) {
   api.use('clinical:user-model@1.5.0');
   api.use('clinical:hl7-resource-datatypes@3.0.0');
   api.use('clinical:hl7-resource-bundle@1.3.10');
-  api.use('clinical:hl7-resource-patient@3.2.11');
+  api.use('clinical:hl7-resource-patient@3.2.29');
   api.use('matb33:collection-hooks@0.7.15');
   api.use('clinical:alert@2.1.3');
   
