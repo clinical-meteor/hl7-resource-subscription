@@ -26,67 +26,10 @@ meteor add clinical:autopublish
 ```
 
 
-#### Example    
+#### Utilities  
 
-```js
-var newSubscription = {
-
-};
-Subscriptions.insert(newSubscription);
-```
+If you're working with HL7 FHIR Resources, we recommend using [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en).
 
 
-#### Extending the Schema  
 
-If you have extra fields that you would like to attach to the schema, extend the schema like so:  
-
-```js
-ExtendedSubscriptionSchema = new SimpleSchema([
-  SubscriptionSchema,
-  {
-    "createdAt": {
-      "type": Date,
-      "optional": true
-    }
-  }
-]);
-Subscriptions.attachSchema( ExtendedSubscriptionSchema );
-```
-
-
-#### Initialize a Sample Subscription  
-
-Call the `initializeSubscription` method to create a sample subscription in the Subscriptions collection.
-
-```js
-Meteor.startup(function(){
-  Meteor.call('initializeSubscription');
-})
-```
-
-
-#### Server Methods  
-
-This package supports `createSubscription`, `initializeSubscription`, and `dropSubscription` methods.
-
-
-#### REST API Points    
-
-This package supports the following REST API endpoints.  All endpoints require an OAuth token.  
-
-```
-GET    /fhir-1.6.0/Subscription/:id    
-GET    /fhir-1.6.0/Subscription/:id/_history  
-PUT    /fhir-1.6.0/Subscription/:id  
-GET    /fhir-1.6.0/Subscription  
-POST   /fhir-1.6.0/Subscription/:param  
-POST   /fhir-1.6.0/Subscription  
-DELETE /fhir-1.6.0/Subscription/:id
-```
-
-If you would like to test the REST API without the OAuth infrastructure, launch the app with the `NOAUTH` environment variable, or set `Meteor.settings.private.disableOauth` to true in you settings file.
-
-```bash
-NOAUTH=true meteor
-```
 
