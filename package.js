@@ -16,6 +16,7 @@ Package.onUse(function (api) {
   api.use('aldeed:collection2@3.0.0');
   api.use('clinical:hl7-resource-datatypes@4.0.0');
   api.use('clinical:hl7-resource-bundle@1.4.0');
+  api.use('clinical:hl7-resource-patient@3.4.2');
 
   api.use('simple:json-routes@2.1.0');
   api.use('momentjs:moment@2.17.1');
@@ -28,7 +29,6 @@ Package.onUse(function (api) {
   api.use('clinical:extended-api@2.2.2');
   api.use('clinical:base-model@1.4.0');
   api.use('clinical:user-model@1.5.0');
-  api.use('clinical:hl7-resource-patient@3.4.0');
   api.use('matb33:collection-hooks@0.7.15');
   api.use('clinical:alert@2.1.3');
   
